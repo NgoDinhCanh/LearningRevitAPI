@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="R11_FoundationPile.View.SettingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="890" d:DesignWidth="360"
+             Background="White"
+             x:Name="SettingUC"
+             >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadSettingViewCommand}" 
+                                   CommandParameter="{Binding ElementName=MainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <ResourceDictionary Source="./../Library/Resource/Styles.xaml"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Header="Pipe Property" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0"   
+                           Style="{StaticResource DataGridTextBlockCenter}" 
+                           Text="Pile Category" ></TextBlock>
+                <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"  
+                          Style="{StaticResource ComboBoxStyle}"
+                          ItemsSource="{Binding FoundationPileModel.SettingModel.CategoryPiles}"
+                          SelectedItem="{Binding SelectedCategoryPile,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          SelectedIndex="{Binding FoundationPileModel.SelectedIndexModel.SelectedIndexPileCategory
+                          ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChangedCategoryCommand}" 
+                                   CommandParameter="{Binding ElementName=MainWindow}"/>
+                    </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            
+                <TextBlock  Grid.Row="1" Grid.Column="0"
+                            Style="{StaticResource DataGridTextBlockCenter}"
+                            Text="Pile Family"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  
+                          Style="{StaticResource ComboBoxStyle}"
+                          ItemsSource="{Binding FoundationPileModel.SettingModel.FamilyPiles}"
+                          DisplayMemberPath="Name"
+                          SelectedItem="{Binding SelectedPileFamily,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          SelectedIndex="{Binding FoundationPileModel.SelectedIndexModel.SelectedIndexPileFamily
+                          ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChangedFamilyCommand}" 
+                                   CommandParameter="{Binding ElementName=MainWindow}"/>
+                    </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                    <TextBlock  Grid.Row="2" Grid.Column="0"
+                            Style="{StaticResource DataGridTextBlockCenter}"
+                            Text="Pile Family Type"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"  
+                          Style="{StaticResource ComboBoxStyle}"
+                          ItemsSource="{Binding FoundationPileModel.SettingModel.FamilySymbolPile}"
+                          DisplayMemberPath="Name"
+                          SelectedItem="{Binding SelectedPileFamilyType,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                          SelectedIndex="{Binding FoundationPileModel.SelectedIndexModel.SelectedIndexPileFamilyType
+                          ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionChangedFamilyTypeCommand}" 
+                                   CommandParameter="{Binding ElementName=MainWindow}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </ComboBox>
+                <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource DataGridTextBlockCenter}" Text="Pile Diameter"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource TextBoxStyle}" 
+                         Text="{Binding FoundationPileModel.SettingModel.DiameterPile ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+</UserControl>
